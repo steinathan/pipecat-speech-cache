@@ -1,6 +1,6 @@
 # pipecat-speech-cache
 
-A simple, async TTS response caching backend for use with Pipecat and compatible TTS systems. Uses Redis for efficient, scalable storage.
+A Redis-based TTS response caching layer for Pipecat to reduce costs and latency.
 
 ## Features
 - Async Redis backend
@@ -11,41 +11,22 @@ A simple, async TTS response caching backend for use with Pipecat and compatible
 ## Installation
 
 ```bash
-# Activate your environment (if not already)
-source ./.venv/bin/activate
-
-# Add dependencies
-uv add redis loguru
+uv add pipecat-speech-cache
 ```
 
-## Usage Example
+## Usage
+
+See `example/bot.py` for a complete Pipecat bot using the cached ElevenLabs TTS service.
 
 ```python
-from redis import RedisBackend
+from pipecat_speech_cache.providers.elevenlabs import CachedElevenlabsTTSService
 
-# Initialize the cache
-cache = RedisBackend(redis_url="redis://localhost:6379/0")
-
-# Store a response
-await cache.store_response(cache_key, response_data)
-
-# Retrieve a response
-response = await cache.get_cached_response(cache_key)
-
-# Get stats
-stats = await cache.get_cache_stats()
-
-# Clear cache
-await cache.clear_cache()
-
-# Close connection
-await cache.close()
+tts = CachedElevenlabsTTSService(
+    api_key=os.environ["ELEVEN_API_KEY"],
+    sample_rate=8000,
+    voice_id="UgBBYS2sOqTuMpoF3BR0",
+)
 ```
-
-## Structure
-- `base.py`: Abstract backend interface
-- `redis.py`: Redis backend implementation
-- `models.py`: Typed cache models
 
 ## License
 MIT
