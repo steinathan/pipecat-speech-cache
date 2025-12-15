@@ -1,6 +1,7 @@
 from collections.abc import AsyncGenerator
 from typing import Any
 
+from aiohttp import ClientSession
 from loguru import logger
 from pipecat.frames.frames import (
     Frame,
@@ -17,17 +18,18 @@ from pipecat_speech_cache.speech_cache import SpeechCacheService
 
 
 class CachedElevenlabsTTSService(ElevenLabsHttpTTSService):
-    """
-    Elevenlabs TTS Service with integrated file-system caching.
-    """
 
     def __init__(
         self,
         agent_cache_key: str = "default",
         enable_cache: bool = True,
+        aiohttp_session: ClientSession | None = None,
         **kwargs,
     ):
-        super().__init__(**kwargs)
+        if aiohttp_session is None:
+            aiohttp_session = ClientSession()
+        
+        super().__init__(aiohttp_session=aiohttp_session, **kwargs)
         self.enable_cache = enable_cache
         self.cache_service = SpeechCacheService(agent_cache_key, backend_type="redis")
         self._current_text = None
