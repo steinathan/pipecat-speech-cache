@@ -1,0 +1,28 @@
+[project]
+name = "pipecat-speech-cache"
+version = "0.1.0"
+description = "A Redis-based TTS response caching layer for Pipecat."
+readme = "README.md"
+requires-python = ">=3.12"
+authors = [
+    {name = "Navicstein Chinemerem", email = "navicsteinrotciv@gmail.com"}
+]
+license = {text = "MIT"}
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.12",
+]
+dependencies = [
+    "pipecat-ai",
+    "elevenlabs",
+    "redis>=7.1.0",
+    "loguru>=0.7.3",
+    "python-dotenv>=1.2.1",
+]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.14.9",
+]
