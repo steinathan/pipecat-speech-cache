@@ -15,7 +15,6 @@ classifiers = [
     "Programming Language :: Python :: 3.12",
 ]
 dependencies = [
-    "pipecat-ai",
     "elevenlabs",
     "redis>=7.1.0",
     "loguru>=0.7.3",
@@ -24,6 +23,7 @@ dependencies = [
 
 [dependency-groups]
 dev = [
+    "pipecat-ai[cartesia,daily,deepgram,local-smart-turn-v3,openai,runner,silero,soundfile,webrtc]",
     "ruff>=0.14.9",
     "pytest>=8.0.0",
     "pytest-asyncio>=0.23.0",
