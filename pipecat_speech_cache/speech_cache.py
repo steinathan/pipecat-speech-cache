@@ -6,8 +6,8 @@ from typing import Any, Literal
 
 from loguru import logger
 
-from models import CachedAudioChunk, CachedResponse
-from pipecat_speech_cache.redis import RedisBackend
+from .models import CachedAudioChunk, CachedResponse
+from .redis import RedisBackend
 
 
 class SpeechCacheService:

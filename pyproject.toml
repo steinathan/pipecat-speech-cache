@@ -25,4 +25,10 @@ dependencies = [
 [dependency-groups]
 dev = [
     "ruff>=0.14.9",
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.23.0",
+    "pipecat-speech-cache",
 ]
+
+[tool.uv.sources]
+pipecat-speech-cache = { workspace = true }
